@@ -9,7 +9,9 @@ pipeline {
 	stages {
 		stage('Checkout') {
 			steps {
-				git branch: 'main', url: 'https://github.com/votre-utilisateur/bibliotheque-app.git'
+				git branch: 'main',
+				url: 'https://github.com/marc1025-ui/bibliotheque-app.git',
+				credentialsId: 'github-pat'
 			}
 		}
 
