@@ -34,8 +34,11 @@ pipeline {
 
 		stage('SonarQube Analysis') {
 			steps {
-				withSonarQubeEnv('SonarQube') {
-					sh 'mvn sonar:sonar'
+				// Récupère le token SonarQube stocké dans Jenkins Credentials
+				withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+					withSonarQubeEnv('SonarQube') {  // Nom du serveur SonarQube configuré dans Jenkins
+						sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+					}
 				}
 			}
 		}
